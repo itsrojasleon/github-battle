@@ -1,3 +1,4 @@
+const path = require("path")
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
@@ -6,6 +7,12 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 });
 
 module.exports = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: '/'
+  },
   module: {
     rules: [
       {
@@ -20,6 +27,9 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       }
     ]
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   plugins: [htmlWebpackPlugin]
 };
