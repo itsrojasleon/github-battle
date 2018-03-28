@@ -1,7 +1,8 @@
 import React from 'react'
 
-import Player from './player'
-import PlayerPreview from './player-preview'
+import Player from '../components/player'
+import PlayerPreview from '../components/player-preview'
+import Loading from '../components/loading'
 
 import queryString from 'query-string'
 import api from '../utils/api'
@@ -35,7 +36,7 @@ class Results extends React.Component {
     const loading = this.state.loading
     return (
       <div>
-        {loading ? <div>Loading...</div>: (
+        {loading ? <div><Loading /></div>: (
           <div className="row">
           <Player
             label="Winner"

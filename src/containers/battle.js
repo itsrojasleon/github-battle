@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import PlayerInput from './player-input'
-import PlayerPreview from './player-preview'
+import PlayerInput from '../components/player-input'
+import PlayerPreview from '../components/player-preview'
 
 class Battle extends React.Component {
   state = {

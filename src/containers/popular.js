@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import SelectLanguage from './select-language'
-import RepoGrid from './repo-grid'
+import SelectLanguage from '../components/select-language'
+import RepoGrid from '../components/repo-grid'
+import Loading from '../components/loading'
 
 import api from '../utils/api'
 
@@ -31,7 +32,7 @@ componentDidMount() {
           onSelect={this.updateLanguage}
         />
         {!this.state.repos ?
-          <div>Loading...</div>:
+          <div><Loading /></div>:
           <RepoGrid repos={this.state.repos} />}
       </div>
     )
