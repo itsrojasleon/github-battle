@@ -1,12 +1,13 @@
 const path = require("path")
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const webpack = require('webpack')
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
   template: "./src/index.html",
   filename: "./index.html"
 });
 
-module.exports = {
+const config = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -33,3 +34,16 @@ module.exports = {
   },
   plugins: [htmlWebpackPlugin]
 };
+
+if(process.env.NODE_ENV === 'production') {
+  config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new config.optimization.minimize()
+  )
+}
+
+module.exports = config
