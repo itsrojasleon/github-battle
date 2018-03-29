@@ -2,6 +2,9 @@
 
 body {
   font-family: 'IBM Plex Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
 }
 ul {
   padding: 0;
@@ -14,8 +17,9 @@ a {
   color: #d0021b;
 }
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: auto;
+  height: 100vh;
 }
 .languages {
   display: flex;
@@ -51,6 +55,12 @@ a {
 }
 .nav {
   display: flex;
+  background: #ffffff;
+  width: 100%;
+  margin: 0 auto 0 auto;
+  padding: 40px;
+  box-sizing: border-box;
+  justify-content: space-around;
 }
 .nav li {
   margin-right: 15px;
@@ -69,18 +79,20 @@ a {
   background: #0a0a0a;
   border: none;
   font-size: 16px;
-  border-radius: 3px;
+  border-radius: 6px;
   width: 200px;
   text-align: center;
   display: block;
-  padding: 7px 0;
+  padding: 15px 0;
   margin: 10px auto;
 }
 
 .button:hover:enabled {
   background: linear-gradient(#1a1a1a,#0a0a0a);
   color: #fff;
+  transition: .2s;
   text-decoration: none;
+  transform: scale(1.1);
 }
 
 .button:active {
@@ -97,13 +109,19 @@ a {
   align-items: center;
 }
 .column input {
-  border-radius: 3px;
+  border-radius: 4px;
   margin: 10px 0;
-  padding: 5px;
+  padding: 8px;
   border: 1px solid #ccc;
   font-size: 16px;
   width: 80%;
   box-sizing: border-box;
+  transition: .4s;
+  text-align: center;
+}
+.column input:focus {
+  border: 2px solid #000;
+  outline: none;
 }
 .column label {
   text-align: center;
@@ -116,13 +134,26 @@ a {
 
 }
 .reset {
-  border: none;
-  background: transparent;
-  color: #d0021b;
+  border: 1px solid #000;
+  background: #ffffff;
+  border-radius: 5px;
+  color: #000;
   display: block;
   width: 100%;
   text-align: center;
+  width: 10%;
+  margin: 5px auto 0 auto;
+  text-align: center;
+  display: block;
+  padding: 5px;
 }
 .reset:hover {
   cursor: pointer;
+}
+.container .players {
+  border: 1px solid #cccccc;
+  background-color: #ffffff;
+  padding: 7px;
+  box-sizing: border-box;
+  margin-top: 10px;
 }
