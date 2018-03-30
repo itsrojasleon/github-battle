@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import PlayerInput from '../components/player-input'
 import PlayerPreview from '../components/player-preview'
 
-class Battle extends React.Component {
+class Battle extends Component {
   state = {
     playerOneName: '',
     playerTwoName: '',
@@ -13,29 +13,28 @@ class Battle extends React.Component {
   }
 
   handleSubmit = (id, username) => {
-    this.setState(() => {
-      const newState = {}
-      newState[id + 'Name'] = username
-      newState[id + 'Image'] = `https://github.com/${username}.png?size=200`
-      return newState
-    })
+    this.setState(() => ({
+      [id + 'Name']: username,
+      [id + 'Image']: `https://github.com/${username}.png?size=200`
+    }))
   }
 
   handleReset = id => {
-    this.setState(() => {
-      const newState = {}
-      newState[id + 'Name'] = ''
-      newState[id + 'Image'] = null
-      return newState
-    })
+    this.setState(() => ({
+      [id + 'Name']: '',
+      [id + 'Image']: null
+    }))
   }
 
   render() {
-    const match = this.props.match
-    const playerOneName = this.state.playerOneName
-    const playerTwoName = this.state.playerTwoName
-    const playerOneImage = this.state.playerOneImage
-    const playerTwoImage = this.state.playerTwoImage
+    const { match } = this.props
+    const {
+      playerOneName,
+      playerTwoName,
+      playerOneImage,
+      playerTwoImage
+    } = this.state
+
     return (
       <div>
         <div className="row">
@@ -53,7 +52,7 @@ class Battle extends React.Component {
             >
               <button
                 className="reset"
-                onClick={this.handleReset.bind(null, 'playerOne')}>
+                onClick={() => this.handleReset('playerOne')}>
                   Reset
               </button>
             </PlayerPreview>}
@@ -72,7 +71,7 @@ class Battle extends React.Component {
             >
               <button
                 className="reset"
-                onClick={this.handleReset.bind(null, 'playerTwo')}>
+                onClick={() => this.handleReset('playerTwo')}>
                   Reset
               </button>
             </PlayerPreview>}

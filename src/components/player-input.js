@@ -7,9 +7,7 @@ class PlayerInput extends React.Component {
   }
 
   handleChange = e => {
-    const username = e.target.value
-
-    this.setState({ username  })
+    this.setState({ username: e.target.value  })
   }
 
   handleSubmit = e => {
@@ -23,6 +21,7 @@ class PlayerInput extends React.Component {
 
   render() {
     const { id, label, onSubmit } = this.props
+    const { username } = this.state
     return (
       <form
         onSubmit={this.handleSubmit}
@@ -35,13 +34,13 @@ class PlayerInput extends React.Component {
           placeholder="Github username"
           type="text"
           autoComplete="off"
-          value={this.state.username}
+          value={username}
           onChange={this.handleChange}
          />
          <button
          className="button"
          type="submit"
-         disabled={!this.state.username}
+         disabled={!username}
          onClick={this.handleSubmit}>
           Submit
          </button>
