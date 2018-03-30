@@ -2,15 +2,24 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class PlayerInput extends React.Component {
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func.isRequired
+  }
+  static defaultProps = {
+    label: 'Username'
+  }
   state = {
     username: ''
   }
 
-  handleChange = e => {
-    this.setState({ username: e.target.value  })
+  handleChange = (e) => {
+    const username = e.target.value
+    this.setState({ username })
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault()
 
     this.props.onSubmit(
@@ -47,10 +56,5 @@ class PlayerInput extends React.Component {
       </form>
     )
   }
-}
-PlayerInput.propTypes = {
-  id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired
 }
 export default PlayerInput

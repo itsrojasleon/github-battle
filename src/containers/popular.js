@@ -22,7 +22,7 @@ componentDidMount() {
 
     api.fetchPopularRepos(lang)
     .then(repos => this.setState({ repos }))
-  }
+}
 
   render() {
     const { selectedLanguage, repos } = this.state

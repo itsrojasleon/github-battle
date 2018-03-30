@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import PlayerPreview from './player-preview'
 
-const Profile = ({ info: { avatar_url, name, location, company, followers, blog, public_repos, login } }) => {
+const Profile = ({ info: { avatar_url, name, location, company, followers, following, blog, public_repos, login } }) => {
   return (
     <PlayerPreview avatar={avatar_url} username={login}>
       <ul className='space-list-items'>
