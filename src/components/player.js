@@ -3,16 +3,16 @@ import PropTypes from 'prop-types'
 
 import Profile from './profile'
 
-const Player = (props) => {
+const Player = ({ label, score, profile }) => {
   return (
     <div>
-      <h1 className="header">{props.label}</h1>
+      <h1 className="header">{label}</h1>
       <h3 style={{
         textAlign: 'center'
       }}>
-        Score: {props.score}
+        Score: {score}
       </h3>
-      <Profile info={props.profile} />
+      <Profile info={profile} />
     </div>
   )
 }

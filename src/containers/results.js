@@ -14,12 +14,12 @@ class Results extends React.Component {
     loading: true
   }
   componentDidMount() {
-    const players = queryString.parse(this.props.location.search)
+    const { playerOneName, playerTwoName } = queryString.parse(this.props.location.search)
 
     api.battle([
-      players.playerOneName,
-      players.playerTwoName
-    ]).then((results) => {
+      playerOneName,
+      playerTwoName
+    ]).then(results => {
       if(results === null) {
         this.setState({ loading: false })
       }
@@ -31,9 +31,7 @@ class Results extends React.Component {
     })
   }
   render() {
-    const winner = this.state.winner
-    const loser = this.state.loser
-    const loading = this.state.loading
+    const { winner, loser, loading } = this.state
     return (
       <div>
         {loading ? <div><Loading /></div>: (
