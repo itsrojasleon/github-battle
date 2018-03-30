@@ -5,7 +5,7 @@ import PlayerPreview from '../components/player-preview'
 import Loading from '../components/loading'
 
 import queryString from 'query-string'
-import api from '../utils/api'
+import { battle } from '../utils/api'
 
 class Results extends React.Component {
   state = {
@@ -13,21 +13,20 @@ class Results extends React.Component {
     loser: null,
     loading: true
   }
-  componentDidMount() {
+  async componentDidMount() {
     const { playerOneName, playerTwoName } = queryString.parse(this.props.location.search)
 
-    api.battle([
+    const results = await battle([
       playerOneName,
       playerTwoName
-    ]).then(results => {
-      if(results === null) {
-        this.setState({ loading: false })
-      }
-      this.setState({
-        winner: results[0],
-        loser: results[1],
-        loading: false
-      })
+    ])
+    if(results === null) {
+      this.setState({ loading: false })
+    }
+    this.setState({
+      winner: results[0],
+      loser: results[1],
+      loading: false
     })
   }
   render() {

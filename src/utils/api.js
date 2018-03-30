@@ -4,9 +4,11 @@ const id = "556ab588466fc75ac350"
 const secret = "e4c338911051856ba813e2f07c3c533a4a804a3c"
 const params = `?client_id=${id}&client_secret=${secret}`
 
-const getProfile = username => {
-  return axios.get(`https://api.github.com/users/${username}${params}`)
-    .then(user => ( user.data ))
+const getProfile = async username => {
+  const { data } = await axios.get(`https://api.github.com/users/${username}${params}`)
+  return data
+  // const profile = await axios.get(`https://api.github.com/users/${username}${params}`)
+  // return profile.data
 }
 
 const getRepos = username => {
@@ -22,14 +24,15 @@ const calculateScore = ({ followers }, repos) => {
   return ( followers * 3 ) + getStarCount(repos)
 }
 
-const getUserData = player => {
-  return Promise.all([
+const getUserData = async player => {
+  const [ profile, repos ] = await Promise.all([
     getProfile(player),
     getRepos(player)
-  ]).then(([profile, repos]) => ({
+  ])
+  return {
     profile,
     score: calculateScore(profile, repos)
-  }))
+  }
  }
 
 const sortPlayers = players => {
@@ -41,17 +44,17 @@ const handleError = error => {
   return null
 }
 
-const api = {
-  battle (players) {
-    return Promise.all(players.map(getUserData))
-      .then(sortPlayers)
-      .catch(handleError)
-  },
-  fetchPopularRepos(language) {
-    const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`)
-
-    return axios.get(encodedURI)
-      .then(({ data: { items } }) => items)
-  }
+export const battle =  async players => {
+  const results = await Promise.all(players.map(getUserData))
+    .catch(handleError)
+  return results === null
+    ? results
+    : sortPlayers(results)
 }
-export default api
+
+export const fetchPopularRepos = async language => {
+  const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`)
+
+  const { data: { items } } = await axios.get(encodedURI)
+  return items
+}

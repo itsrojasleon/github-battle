@@ -5,7 +5,7 @@ import SelectLanguage from '../components/select-language'
 import RepoGrid from '../components/repo-grid'
 import Loading from '../components/loading'
 
-import api from '../utils/api'
+import { fetchPopularRepos } from '../utils/api'
 
 class Popular extends Component {
   state = {
@@ -17,11 +17,11 @@ componentDidMount() {
   this.updateLanguage(this.state.selectedLanguage)
 }
 
-  updateLanguage = lang => {
+  updateLanguage = async lang => {
     this.setState({ selectedLanguage: lang })
 
-    api.fetchPopularRepos(lang)
-    .then(repos => this.setState({ repos }))
+    const repos = await fetchPopularRepos(lang)
+    this.setState({ repos })
 }
 
   render() {
