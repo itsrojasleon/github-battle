@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const SelectLanguage = (props) => {
+const SelectLanguage = ({ selectedLanguage, onSelect }) => {
   const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python']
     return (
       <ul className="languages">
         {languages.map(lang => (
-          <li style={lang === props.selectedLanguage ? { color: '#d0021b' } : null}
-            onClick={props.onSelect.bind(null, lang)}
+          <li style={lang === selectedLanguage ? { color: '#d0021b' } : null}
+            onClick={() => onSelect(lang)}
             key={lang}>
             {lang}
           </li>

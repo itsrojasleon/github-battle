@@ -5,20 +5,20 @@ const RepoGrid = ({ repos }) => {
   return (
     <div>
       <ul className="poplular-list">
-        {repos.map((repo, index) => (
-          <li key={repo.name} className="popular-item">
+        {repos.map(({ name, owner: { avatar_url, login  }, stargazers_count, html_url }, index) => (
+          <li key={name} className="popular-item">
             <div className="popular-rank"># {index + 1}</div>
             <ul className="space-list-items">
               <li>
                 <img
-                  src={repo.owner.avatar_url}
+                  src={avatar_url}
                   className="avatar"
-                  alt={repo.owner.login}
+                  alt={login}
                 />
               </li>
-              <li><a href={repo.html_url}>{repo.name}</a></li>
-              <li>@{repo.owner.login}</li>
-              <li>{repo.stargazers_count} stars</li>
+              <li><a href={html_url}>{name}</a></li>
+              <li>@{login}</li>
+              <li>{stargazers_count} stars</li>
             </ul>
           </li>
         ))}

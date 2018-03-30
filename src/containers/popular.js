@@ -7,7 +7,7 @@ import Loading from '../components/loading'
 
 import api from '../utils/api'
 
-class Popular extends React.Component {
+class Popular extends Component {
   state = {
     selectedLanguage: 'All',
     repos: null
@@ -21,19 +21,20 @@ componentDidMount() {
     this.setState({ selectedLanguage: lang })
 
     api.fetchPopularRepos(lang)
-    .then((repos) => this.setState({ repos }))
+    .then(repos => this.setState({ repos }))
   }
 
   render() {
+    const { selectedLanguage, repos } = this.state
     return (
       <div>
         <SelectLanguage
-          selectedLanguage={this.state.selectedLanguage}
+          selectedLanguage={selectedLanguage}
           onSelect={this.updateLanguage}
         />
-        {!this.state.repos ?
+        {!repos ?
           <div><Loading /></div>:
-          <RepoGrid repos={this.state.repos} />}
+          <RepoGrid repos={repos} />}
       </div>
     )
   }
