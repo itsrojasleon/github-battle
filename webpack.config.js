@@ -10,6 +10,7 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 const config = {
   entry: [
     'babel-polyfill',
+    'whatwg-fetch',
     './src/index.js',
   ],
   output: {

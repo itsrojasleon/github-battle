@@ -1,22 +1,21 @@
-import axios from 'axios'
+import 'whatwg-fetch'
 
 const id = "556ab588466fc75ac350"
 const secret = "e4c338911051856ba813e2f07c3c533a4a804a3c"
 const params = `?client_id=${id}&client_secret=${secret}`
 
 const getProfile = async username => {
-  const { data } = await axios.get(`https://api.github.com/users/${username}${params}`)
-  return data
-  // const profile = await axios.get(`https://api.github.com/users/${username}${params}`)
-  // return profile.data
+  const response = await fetch(`https://api.github.com/users/${username}${params}`)
+  return response.json()
 }
 
-const getRepos = username => {
-  return axios.get(`https://api.github.com/users/${username}/repos${params}&per_page=100`)
+const getRepos = async username => {
+  const profile = await fetch(`https://api.github.com/users/${username}/repos${params}&per_page=100`)
+  return profile.json()
 }
 
 const getStarCount = repos => {
-  return repos.data.reduce((count, { stargazers_count }) =>count +
+  return repos.reduce((count, { stargazers_count }) =>count +
     stargazers_count, 0)
 }
 
@@ -55,6 +54,7 @@ export const battle =  async players => {
 export const fetchPopularRepos = async language => {
   const encodedURI = window.encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`)
 
-  const { data: { items } } = await axios.get(encodedURI)
-  return items
+  const response = await fetch(encodedURI)
+  const repos = await response.json()
+  return repos.items
 }
